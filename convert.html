@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Convert</title>
+  </head>
+  <body>
+    <div id="container">
+      <table>
+        <table>
+          <tbody>
+            <tr>
+              <th><label for="Amount">Amount</label></th>
+              <th>From Currency</th>
+              <th>To Currency</th>
+              <th></th>
+            </tr>
+            <tr>
+              <td><input type="text" id="Amount" /></td>
+              <td>
+                <select id="From">
+                  <option value="VND">VND</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                </select>
+              </td>
+              <td>
+                <select id="To">
+                  <option value="VND">VND</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                </select>
+              </td>
+              <td><button onclick="ChangeMoney()">Convert</button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <br />
+        <p id="Result"></p>
+      </table>
+    </div>
+
+    <script>
+      function ChangeMoney() {
+        let amount = document.getElementById("Amount").value;
+        let fromCurrency = document.getElementById("From").value;
+        let toCurrency = document.getElementById("To").value;
+        let Result = null;
+
+        if (
+          (fromCurrency == "VND" && toCurrency == "VND") ||
+          (fromCurrency == "USD" && toCurrency == "USD") ||
+          (fromCurrency == "EUR" && toCurrency == "EUR")
+        ) {
+          Result = amount;
+        } else if (fromCurrency == "USD" && toCurrency == "VND") {
+          Result = amount * 23.5 + "00 VND";
+        } else if (fromCurrency == "VND" && toCurrency == "USD") {
+          Result = amount / 23.5 + "$";
+        }
+        // } else if (fromCurrency == "EUR" && toCurrency == "VNĐ") {
+        //   Result = amount * 25.7 + "00 VNĐ";
+        // } else if (fromCurrency == "VNĐ" && toCurrency == "EUR") {
+        //   Result = amount / 25.7 + "EUR";
+        // }
+
+        document.getElementById("Result").innerHTML = Result;
+      }
+    </script>
+  </body>
+</html>
